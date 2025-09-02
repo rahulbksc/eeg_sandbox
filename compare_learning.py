@@ -1,4 +1,3 @@
-# Install necessary packages if not installed
 # !pip install numpy scipy scikit-learn matplotlib tensorflow mne
 
 import numpy as np
@@ -23,11 +22,12 @@ eeg_epochs = np.random.randn(n_epochs, epoch_length)
 labels = np.random.randint(0, n_classes, n_epochs)
 
 # ----------- FEATURE EXTRACTION FOR ML ------------
+# Extracts classic EEG features (Band power)
 
 def compute_bandpower(epoch, sf=100, band=(0.5, 4)):
     freqs, psd = signal.welch(epoch, sf)
     idx_band = np.logical_and(freqs >= band[0], freqs <= band[1])
-    return np.trapz(psd[idx_band], freqs[idx_band])
+    return np.trapezoid(psd[idx_band], freqs[idx_band])
 
 # Extract 5 band power features: Delta, Theta, Alpha, Beta, Gamma
 bands = {'delta': (0.5, 4), 'theta': (4, 8), 'alpha': (8, 12), 'beta': (12, 30), 'gamma': (30, 45)}
