@@ -2,8 +2,8 @@ import mne
 import numpy as np
 
 # 1. Load raw EEG data (update filepath and file format as needed)
-raw = mne.io.read_raw_fif('your_file_raw.fif', preload=True)  
-# Alternative: read_raw_edf('your_file.edf'), etc.
+raw = mne.io.read_raw_fif('raw.fif', preload=True)  
+
 
 # 2. Apply Bandpass Filter (e.g., 1-50 Hz for general EEG analysis)
 raw.filter(l_freq=1.0, h_freq=50.0)
@@ -54,4 +54,5 @@ which allows flexible re-referencing later if needed.
 raw.set_eeg_reference('average', projection=True)
 
 # 9. Save the preprocessed data
+
 raw.save('preprocessed_raw.fif', overwrite=True)
